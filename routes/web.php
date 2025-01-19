@@ -36,7 +36,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/{car}', [CarController::class, 'show'])->name('cars.show');
         Route::get('/{car}/edit', [CarController::class, 'edit'])->name('cars.edit');
         Route::put('/{car}', [CarController::class, 'update'])->name('cars.update');
-        Route::delete('/{car}', [CarController::class, 'destroy'])->name('cars.destroy');
+        Route::delete('/{car}/delete', [CarController::class, 'destroy'])->name('cars.destroy');
     });
 
     Route::prefix('rentals')->group(function () {
