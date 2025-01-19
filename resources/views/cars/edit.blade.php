@@ -26,7 +26,7 @@
                             <label>Daily Rate</label>
                             <input type="number" name="daily_rate" class="form-control" value="{{ $car->daily_rate }}" required>
                         </div>
-                        <button type="submit" class="btn btn-success">Update</button>
+                        <button type="submit" class="btn btn-success mt-3">Update</button>
                     </form>
                 </div>
             </div>

@@ -3,34 +3,36 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use app\Models\User;
+use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
+
     public function register(Request $request)
     {
         $request->validate([
-            'name' => 'required',
+            'name' => 'required|string',
             'email' => 'required|email|unique:users',
-            'password' => 'required|min:6',
+            'password' => 'required|string|min:8|confirmed',
             'address' => 'required',
             'phone' => 'required',
             'sim_number' => 'required|unique:users',
         ]);
 
-        User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'address' => $request->address,
-            'phone' => $request->phone,
-            'sim_number' => $request->sim_number,
-        ]);
+        $user = new User();
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->password = bcrypt($request->input('password'));
+        $user->address = $request->input('address');
+        $user->phone = $request->input('phone');
+        $user->sim_number = $request->input('sim_number');
+        $user->save();
 
-        return redirect()->route('login')->with('success', 'Registration successful!');
+        return redirect()->route('login')->with('success', 'Register berhasil!');
     }
+
     public function login(Request $request)
     {
         $credentials = $request->validate([
