@@ -14,6 +14,14 @@ class Car extends Model
         'is_available',
     ];
 
+    public static function boot()
+    {
+        parent::boot();
+        static::deleting(function ($car) {
+            $car->delete();
+        });
+    }
+
     public function rentals()
     {
         return $this->hasMany(Rental::class);

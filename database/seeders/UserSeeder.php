@@ -14,13 +14,29 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
+        // User::create([
+        //     'name' => 'admin1',
+        //     'email' => 'admin1@gmail.com',
+        //     'password' => Hash::make('admin'),
+        //     'address' => 'admin',
+        //     'phone' => 'admin',
+        //     'sim_number' => 'admin',
+        //     'role' => 'admin',
+        // ]);
+
         User::create([
-            'name' => 'test1',
-            'email' => 'test1@gmail.com',
-            'password' => Hash::make('test'),
-            'address' => 'test',
-            'phone' => 'test',
-            'sim_number' => 'test',
+            'name' => 'user3',
+            'email' => 'User3@gmail.com',
+            'password' => Hash::make('user3'),
+            'address' => 'User Bandung',
+            'phone' => '01921323',
+            'sim_number' => '23934834',
+            'role' => 'user',
         ]);
+
+
+        // johndoe
+        // adminadmin
+
     }
 }

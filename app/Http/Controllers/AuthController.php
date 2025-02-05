@@ -28,9 +28,13 @@ class AuthController extends Controller
         $user->address = $request->input('address');
         $user->phone = $request->input('phone');
         $user->sim_number = $request->input('sim_number');
+        $user->role = 'user';
         $user->save();
 
-        return redirect()->route('login')->with('success', 'Register berhasil!');
+        return response()->json([
+            'success' => true,
+            'message' => 'Registrasi berhasil! Silakan login.',
+        ]);
     }
 
     public function login(Request $request)
@@ -41,15 +45,23 @@ class AuthController extends Controller
         ]);
 
         if (Auth::attempt($credentials)) {
-            return redirect()->route('dashboard');
+            $user = Auth::user();
+            if ($user->role === 'admin') {
+                return redirect()->route('admin.dashboard');
+            } elseif ($user->role === 'user') {
+                return redirect()->route('user.dashboard');
+            }
         }
 
-        return back()->withErrors(['email' => 'Invalid credentials']);
+        // Jika login gagal, kirimkan pesan error
+        return back()->withErrors([
+            'email' => 'Invalid credentials.',
+        ])->withInput();
     }
 
     public function logout()
     {
         Auth::logout();
-        return redirect()->route('login');
+        return redirect()->route('guest.index');
     }
 }
