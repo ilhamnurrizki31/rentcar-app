@@ -52,7 +52,9 @@ Route::middleware('auth')->group(function () {
         Route::get('/{car}/edit', [CarController::class, 'edit'])->name('cars.edit')->middleware(CheckUserRole::class . ':admin');
         ;
         Route::put('/{car}', [CarController::class, 'update'])->name('cars.update');
-        Route::delete('/{car}/delete', [CarController::class, 'destroy'])->name('cars.destroy')->middleware(CheckUserRole::class . ':admin');
+        Route::delete('/{car}/delete', [CarController::class, 'destroy'])
+            ->name('cars.destroy')
+            ->middleware(CheckUserRole::class . ':admin');
         ;
     });
 

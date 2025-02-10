@@ -3,6 +3,7 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+ini_set('memory_limit', '512M');
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -14,3 +15,4 @@ return Application::configure(basePath: dirname(__DIR__))
     })
     ->withExceptions(function (Exceptions $exceptions) {
     })->create();
+

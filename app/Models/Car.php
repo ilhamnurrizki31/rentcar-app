@@ -18,7 +18,7 @@ class Car extends Model
     {
         parent::boot();
         static::deleting(function ($car) {
-            $car->delete();
+            $car->rentals()->delete();
         });
     }
 
